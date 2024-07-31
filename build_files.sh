@@ -9,7 +9,4 @@ python3 get-pip.py
 
 # Install required Python packages
 pip3 install -r requirements.txt
-
-# Continue with your build steps
-python3 manage.py collectstatic --noinput
 python3 manage.py migrate
