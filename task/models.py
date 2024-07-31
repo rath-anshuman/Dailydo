@@ -11,5 +11,17 @@ class Task(models.Model):
 
     def __str__(self) :
         return self.title
-    
-    
+
+
+
+
+
+#---------------------For Api -------------------------
+
+
+from rest_framework import serializers
+
+class TaskSerializers(serializers.ModelSerializer):
+    class Meta:
+        model=Task
+        fields='__all__'
