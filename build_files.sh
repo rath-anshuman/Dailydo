@@ -11,5 +11,5 @@ python3 --version
 pip3 install -r requirements.txt
 
 # Continue with your build steps
-python3 manage.py collectstatic
+python3 manage.py collectstatic --noinput
 python3 manage.py migrate
