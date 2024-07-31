@@ -34,8 +34,7 @@ def tasks(request):
 def taskadd(request):
     if request.method=='POST':
         title=request.POST.get('title')
-        description=request.POST.get('description')
-        task=Task.objects.create(title=title,description=description)
+        task=Task.objects.create(title=title)
         task.save()
         return redirect('tasks')
     return render(request,'taskadd.html')
