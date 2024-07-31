@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorful Modern Page</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .back-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .complete-button,
+        .delete-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .description {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .confirm-yes,
+        .confirm-no {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="back-button">Back</button>
+        </div>
+        <div class="description">
+            {% if task.complete %}
+            green
+            {% else %}
+            red
+            {% endif %}
+
+            <h2>{{task.title}}</h2>
+            {% if task.description %}
+            <p>{{task.description}}</p>
+            {% else %}
+            <p>No description available</p>
+            {% endif %}
+        </div>
+        <button class="complete-button">
+            {% if task.complete %}
+            <a href="{% url "taskmod" task.id %}">Mark Not Complete</a>
+            {% else %}
+            <a href="{% url "taskmod" task.id %}">Mark Complete</a>
+            {% endif %}
+            
+        
+        </button>
+        <button class="delete-button">Delete</button>
+    </div>
+
+    <div class="popup" id="confirm-popup">
+        <p>Are you sure you want to delete?</p>
+        <button class="confirm-yes"><a href="{% url "taskdel" task.id %}">Yes</a></button>
+        <button class="confirm-no">No</button>
+    </div>
+
+    <script>
+        const deleteButton = document.querySelector('.delete-button');
+        const confirmPopup = document.getElementById('confirm-popup');
+        const confirmYes = document.querySelector('.confirm-yes');
+        const confirmNo = document.querySelector('.confirm-no');
+        deleteButton.addEventListener('click', () => {
+            confirmPopup.style.display = 'block';
+        });
+        confirmYes.addEventListener('click', () => {
+            // Add your delete logic here
+            confirmPopup.style.display = 'none';
+        });
+        confirmNo.addEventListener('click', () => {
+            confirmPopup.style.display = 'none';
+        });
+    </script>
+
+
+</body>
+</html>
